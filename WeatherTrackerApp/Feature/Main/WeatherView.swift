@@ -89,7 +89,7 @@ struct WeatherView: View {
                         Text("UV")
                             .font(.custom("Poppins-Medium", size: 12))
                             .foregroundColor(.gray)
-                        Text("\(weather.current.uv)")
+                        Text(weather.current.uv.formatted(.number.precision(.fractionLength(0...2))))
                             .font(.custom("Poppins-Medium", size: 15))
                             .foregroundColor(.gray)
                     }
@@ -130,6 +130,24 @@ struct WeatherView: View {
             // Display initial message when view appears
             viewModel.weatherMessage = "No City Selected"
         }
+        .background(
+            Color.white // Add a background color to detect taps
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    hideKeyboard() // Hide the keyboard on tap outside
+                }
+        )
+    }
+
+    // Helper function to hide the keyboard
+    private func hideKeyboard() {
+        UIApplication.shared.endEditing()
+    }
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

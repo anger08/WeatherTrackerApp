@@ -53,7 +53,7 @@ class MainViewModel: ObservableObject {
                 guard let self = self else { return }
                 switch completion {
                 case .finished:
-                    print("Consulta exitosa")
+                    print("Successful query")
                 case .failure(let error):
                     self.weatherResponse = nil
                     self.weatherMessage = "Invalid city: \(query)"
@@ -65,7 +65,7 @@ class MainViewModel: ObservableObject {
                 self.weatherResponse = response
                 self.weatherMessage = nil
                 self.isSearching = true
-                print("Respuesta recibida: \(response)")
+                print("Response received: \(response)")
             })
     }
 
